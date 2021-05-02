@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} This is a blog post..{% endblock %}
+
+{% block content %}
+
+<br>
+<h1>{{ post.title }}</h1>
+<small>By: {{ post.author.first_name }} </small><br/>
+<hr>
+<br/>
+
+{{ post.body }}
+<br/>
+<a href="{% url 'home'%}" class="btn btn-secondary">Back</a>
+
+<br/><br/>
+<h5>Comment...</h5>
+{% if not post.comments.all %}
+    <a href="{% url 'add_comment' post.pk %}">Add Comment</a>
+    
+    {{ comment.name }} - {{ comment.date_added}}
+    {{ comment.body }}
+    
+{% else %}
+    <a href="{% url 'add_comment' %}">Add Comment</a>
+    {% for comment in post.comments.all %}
+        <!-- <strong> -->
+            {{ comment.name }} -
+                {{ comment.date_added}}
+                {{ comment.body }}
+    {% endfor %}
+
+{% endif %}
+
+{% endblock%}

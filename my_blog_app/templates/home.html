@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <br>   
+    <h1>Post</h1>
+    <br/>
+
+    <ul>
+    {% for post in object_list %}
+        <li><a href="{% url 'article-detail' post.pk %}"> 
+        {{post.title }}</li></a> - {{ post.author.first_name }}
+        {{ post.author.last_name }} <br/>
+        {{ post.body }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+<br/> <h3>You're welcome to Malthus blog.<br/>
+<br/> Kindly register if you do not have an account with us, otherwise, login........</h3><br/>
+{% endif %}
+{% endblock %}
